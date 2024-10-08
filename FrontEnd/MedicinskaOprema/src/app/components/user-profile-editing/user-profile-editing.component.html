@@ -1,0 +1,69 @@
+<div *ngIf="person">
+  <h2>Your profile information</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" [readonly]="true" formControlName="email" />
+      </div>
+
+      <div>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" formControlName="phone" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" />
+      </div>
+
+      <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" formControlName="surname" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div>
+        <label for="city">City:</label>
+        <input type="text" id="city" formControlName="city" />
+      </div>
+
+      <div>
+        <label for="country">Country:</label>
+        <input type="text" id="country" formControlName="country" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div>
+        <label for="category">Category:</label>
+        <select id="category" formControlName="category" (change)="onCategoryChange($event)">
+          <option value="SILVER">SILVER</option>
+          <option value="GOLD">GOLD</option>
+          <option value="REGULAR">REGULAR</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="penaltyPoints">Penalty points:</label>
+        <input type="text" id="penaltyPoints"  [readonly]="true" formControlName="penaltyPoints" />
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div>
+        <label for="benefits">Benefits:</label>
+        <textarea id="benefits" [readonly]="true" formControlName="benefits"></textarea>
+      </div>
+    </div>
+    
+    <button type="submit">Save Changes</button>
+  </form>
+</div>
+
+<div *ngIf="!person">
+  <p>Loading...</p>
+</div>

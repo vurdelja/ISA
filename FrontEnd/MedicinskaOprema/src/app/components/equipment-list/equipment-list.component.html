@@ -1,0 +1,53 @@
+<div *ngIf="equipmentList.length > 0" class="appointment-details">
+    <h3>Equipment List</h3>
+    <table class="appointment-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Rating</th>
+          <th>Left</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of equipmentList">
+          <td>{{ equipment.name }}</td>
+          <td>{{ equipment.type }}</td>
+          <td>{{ equipment.description }}</td>
+          <td>{{ equipment.rating }}</td>
+          <td>{{ equipment.count }}</td>
+          <td>
+            <!-- Edit Equipment button -->
+            <button class="edit-button" (click)="editEquipment(equipment)">Edit</button>
+            <!-- Delete Equipment button -->
+            <button class="edit-button" (click)="deleteEquipment(equipment.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="reserve-button" (click)="toggleAddEquipmentForm()">Add new equipment</button>
+
+  <!-- Show the form when the flag is true -->
+  <form *ngIf="showAddEquipmentForm" [formGroup]="addEquipmentForm" (ngSubmit)="addEquipment()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter equipment name" formControlName="name" required>
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" placeholder="Enter equipment type" formControlName="type" required>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" placeholder="Enter equipment description" formControlName="description" required>
+    
+    <label for="count">Number of pieces:</label>
+    <input type="text" id="count" placeholder="Enter equipment count" formControlName="count" required>
+    
+    <button type="submit" class="reserve-button">Submit</button>
+  </form>
+  </div>
+  
+  <div *ngIf="equipmentList.length === 0">
+    <p>No equipment available for this company.</p>
+  </div>
+  

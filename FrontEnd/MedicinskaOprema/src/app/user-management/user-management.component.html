@@ -1,0 +1,29 @@
+<div>
+    <h2>User Management</h2>
+  
+    <!-- Prikazi listu korisnika -->
+    <ul>
+      <li *ngFor="let user of userList">
+        {{ user.name }} - {{ user.email }} - {{ user.surname }}<!-- Prilagodite prikaz podataka prema vašem modelu User -->
+      </li>
+    </ul>
+    <form [formGroup]="userForm" (submit)="addUser()">
+        <label for="name">Ime:</label>
+        <input type="text" id="name" formControlName="name" required>
+      
+        <label for="surname">Prezime:</label>
+        <input type="text" id="surname" formControlName="surname" required>
+      
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+      
+        <label for="password">Šifra:</label>
+        <input type="password" id="password" formControlName="password" required>
+      
+        <!-- Dodajte ostala polja prema potrebi -->
+      
+        <button type="submit">Dodaj korisnika</button>
+      </form>
+      
+  </div>
+  

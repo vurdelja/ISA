@@ -1,0 +1,6 @@
+body {
+    background-color: #d8f1f5; /* Svetlo siva boja za pozadinu */
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

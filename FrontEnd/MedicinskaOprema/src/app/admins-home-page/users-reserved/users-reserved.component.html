@@ -1,0 +1,9 @@
+<div *ngIf="usersWhoReserved.length > 0">
+    <h2>Users</h2>
+    <ul>
+        <li *ngFor="let user of usersWhoReserved">
+            <p>Name: {{ user.name }}</p>
+            <p>Surname: {{ user.surname }}</p>
+        </li>
+    </ul>
+</div>

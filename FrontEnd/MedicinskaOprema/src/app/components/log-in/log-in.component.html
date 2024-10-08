@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm" class="border p-3 rounded-3" style="text-align: center; background-color: #C6E7C9;" (ngSubmit)="login()">
+  <fieldset style="color: black; text-align: center;">
+    <legend style="font-size: 32px; margin-bottom: 20px;">Log In</legend>
+    <table style="text-align:center; margin: 0 auto;">
+      <tr>
+        <td style="color: black; text-align: right; font-size: 30px;">Email:</td>
+        <td>
+          <input type="email" style="color: black; font-size: 30px;" class="fore-control" id="email" formControlName="email">
+        </td>
+      </tr>
+      <tr>
+        <td style="color: black; font-size: 30px;">Password:</td>
+        <td>
+          <input type="password" style="color: black; font-size: 30px;" class="fore-control" id="password" formControlName="password">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <div class="col-6 offset-3">
+            <div class="d-grid">
+              <button type="submit" style="background-color: rgb(103, 176, 76); font-size: 20px; border: none; border-radius: 5px; padding: 10px 20px;" [disabled]="loginForm.invalid" class="btn btn-primary" click>Submit</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</form>
+<div class="text-center mt-3" style="text-align: center;">
+  <p style="font-size: larger; font-weight: 300; text-align: center;">Don't have an account?</p>
+  <button class="registration-button" style="background-color: rgb(103, 176, 76); font-size: larger; text-align: right; border: none; border-radius: 5px; padding: 10px 20px;" [routerLink]="['/app-registration']">Register here!</button>
+</div>

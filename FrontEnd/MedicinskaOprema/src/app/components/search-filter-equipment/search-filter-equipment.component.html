@@ -1,0 +1,47 @@
+<!-- Search input for ordering equipment -->
+
+<form [formGroup]="searchForm">
+  <!-- Search input for filtering equipment -->
+  <div>
+    <label for="searchEquipment">Search Equipment:</label>
+    <input type="text" id="searchEquipment" formControlName="searchTerm" (input)="filterEquipment()" />
+  </div>
+
+ 
+
+  <div>
+    <label for="filterType">Filter by Equipment Type:</label>
+    <select id="filterType" formControlName="filterType" (change)="filterEquipment()">
+      <option value="">All Types</option>
+      <option value="Type1">Type1</option>
+      <option value="Type2">Type2</option>
+      <!-- Add more equipment type options as needed -->
+    </select>
+  </div>
+</form>
+<!-- Display filtered equipment list -->
+<div *ngIf="filteredEquipmentList.length > 0">
+  <h2>Filtered Equipment List</h2>
+  <ul>
+    <li *ngFor="let equipment of filteredEquipmentList">
+      <p>Description: {{ equipment.description }}</p>
+      <p>Name: {{ equipment.name }}</p>
+      <p>Type: {{ equipment.type }}</p>
+      <p>Description: {{ equipment.description }}</p>
+      <button (click)="showCompanyDetails(equipment.id)">Show Companies</button>
+    </li>
+  </ul>
+</div>
+
+<!-- Display company details -->
+<div *ngIf="companyList.length > 0">
+  <h2>Companies</h2>
+  <ul>
+    <li *ngFor="let company of companyList">
+     
+      <p>Name: {{ company.name }}</p>
+      <p>Description: {{ company.description }}</p>
+      <!-- Display other company properties as needed -->
+    </li>
+  </ul>
+</div>

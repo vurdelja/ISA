@@ -1,0 +1,32 @@
+<form [formGroup]="searchForm">
+  <div>
+    <label for="searchCompanies">Search companies by name or address:</label>
+    <input type="text" id="searchCompanies" formControlName="searchTerm" (input)="filterCompanies()" />
+  </div>
+
+  <div>
+    <label for="filterType">Filter by average rating:</label>
+    <select id="filterType" formControlName="filterType" (change)="filterCompanies()">
+      <option value="">All Ratings</option>
+      <option value="5">5 Stars</option>
+      <option value="4-5">4-5 Stars</option>
+      <option value="3-4">3-4 Stars</option>
+      <option value="<3">Below 3 Stars</option>
+    </select>
+  </div>
+
+  <!-- Display the list of companies -->
+  <div>
+    <h2>List of Companies</h2>
+    <ul>
+      <li *ngFor="let company of filteredCompaniesList">
+        <strong>Company name:</strong> {{ company.name }}
+        <br>
+        <strong>Address:</strong> {{ company.address }}
+        <br>
+        <strong>Average rating:</strong> {{ company.averageRating }}
+        <br>
+      </li>
+    </ul>
+  </div>
+</form>

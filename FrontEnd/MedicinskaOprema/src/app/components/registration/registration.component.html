@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Bootstrap CSS link -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <title>Registration Form</title>
+  <style>
+    /* Add your custom styles here if needed */
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #C6E7C9; /* Set a background color for the body */
+    }
+    .custom-border {
+      border: 1px solid #343a40; /* Set border color */
+      padding: 20px; /* Add padding for better appearance */
+      border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+    }
+    .custom-margin {
+      margin-top: 20px; /* Add some top margin for better spacing */
+    }
+
+  </style>
+   
+</head>
+
+<body>
+
+ <form [formGroup]="registrationForm" (ngSubmit)="registerSubmited()"  class="border p-3 rounded-s"> 
+  <div class="container">
+    <div class="custom-border">
+      <div class="row g-0 text-center mb-3">
+        <div class="col">
+          <h2 style="color:rgb(5, 164, 114)">REGISTRATION</h2>
+        </div>
+      </div>
+    
+        
+        <!-- Email and Password -->
+        <div class="col mb-3">
+          <label for="email" class="form-label" style="font-weight: bold;">EMAIL</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <div class="form-text text-danger" *ngIf="Email.errors?.['required']">
+            Email is required!
+          </div>
+          <div class="form-text text-danger" *ngIf="Email.errors?.['email']">
+            Email is invalid
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <label for="password" class="form-label" style="font-weight: bold;">PASSWORD</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <div class="form-text text-danger" *ngIf="Password.errors?.['required']">
+              Password is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="Password.errors?.['minlength']">
+              Use longer password(minimum 8 characters)
+            </div>
+          </div>
+          <div class="col mb-3">
+            <label for="rpassword" class="form-label" style="font-weight: bold;">REPEAT PASSWORD</label>
+            <input type="password" class="form-control" id="rpassword" formControlName="rpassword">
+            <div class="form-text text-danger" [ngStyle]="{'display': repeatedPassword}">
+              Repeat password is invalid!
+            </div>
+          </div>
+        </div>
+        
+        <!-- Name -->
+        <div class="row">
+          <div class="col mb-3">
+            <label for="name" class="form-label" style="font-weight: bold;">NAME:</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div class="form-text text-danger" *ngIf="Name.errors?.['required']">
+              Name is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="Name.errors?.['pattern']">
+              Numbers are not aloved!
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <label for="surname" class="form-label" style="font-weight: bold;">SURNAME</label>
+            <input type="text" class="form-control" id="surname" formControlName="surname">
+            <div class="form-text text-danger" *ngIf="Surname.errors?.['required']">
+              Surname is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="Surname.errors?.['pattern']">
+              Numbers are not aloved!
+            </div>
+          </div>
+        </div>
+        
+        <!-- City and Country -->
+        <div class="row">
+          <div class="col mb-3">
+            <label for="city" class="form-label" style="font-weight: bold;">CITY</label>
+            <input type="text" class="form-control" id="city" formControlName="city">
+              <div class="form-text text-danger" *ngIf="City.errors?.['required']">
+              City is required!
+            </div> 
+            <div class="form-text text-danger" *ngIf="City.errors?.['pattern']">
+              Numbers are not aloved!
+            </div>
+          </div>
+          <div class="col mb-3">
+            <label for="country" class="form-label" style="font-weight: bold;">COUNTRY</label>
+            <input type="text" class="form-control" id="country" formControlName="country">
+            <div class="form-text text-danger" *ngIf="Country.errors?.['required']">
+              Country is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="Country.errors?.['pattern']">
+              Numbers are not aloved!
+            </div>
+          </div>
+        </div>
+        
+        <!-- Phone Number -->
+        <div class="row">
+          <div class="col mb-3">
+            <label for="number" class="form-label" style="font-weight: bold;">PHONE NUMBER</label>
+            <input type="text" class="form-control" id="number" formControlName="number">
+            <div class="form-text text-danger" *ngIf="Number.errors?.['required']">
+              Number is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="Number.errors?.['minlength']">
+              This number is short, Minimal number length is 10
+            </div>
+            <div class="form-text text-danger" *ngIf="Number.errors?.['maxlength']">
+              This number is too long, Maximum number length is 10
+            </div>
+            <div class="form-text text-danger" *ngIf="Number.errors?.['pattern']">
+              Number should be in this form:06..
+            </div>
+          </div>
+        </div>
+      
+        <!-- Profession -->
+        <div class="row">
+          <div class="col mb-3">
+            <label for="profession" class="form-label" style="font-weight: bold;">PROFESSION</label>
+            <input type="text" class="form-control" id="profession" formControlName="profession">
+            <div class="form-text text-danger" *ngIf="Profession.errors?.['required']">
+              Profession is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="Profession.errors?.['pattern']">
+              Numbers are not aloved!
+            </div>
+          </div>
+        </div>
+      
+        <!-- Company Information -->
+        <div class="row">
+          <div class="col mb-3">
+            <label for="companyInfo" class="form-label" style="font-weight: bold;">COMPANY INFORMATION</label>
+            <textarea class="form-control" id="companyInfo" formControlName="companyInfo" rows="3"></textarea>
+            <div class="form-text text-danger" *ngIf="CompanyInfo.errors?.['required']" >
+              Company information is required!
+            </div>
+            <div class="form-text text-danger" *ngIf="CompanyInfo.errors?.['pattern']">
+              Numbers are not aloved!
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 offset-3 text-center">
+            <div class="d-grid">
+              <button type="submit" [disabled]="registrationForm.invalid" style="width: 200px;background-color:rgb(5, 164, 114); font-weight: bold; height: 50px; font-size: 18px;" class="btn btn-primary btn-lg mx-auto">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+    
+    </div>
+  
+  </form>
+    <!-- Add Bootstrap JS and Popper.js scripts if needed -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+
+  </html>

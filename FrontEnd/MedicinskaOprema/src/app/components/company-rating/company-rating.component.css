@@ -1,0 +1,75 @@
+div {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  /* Style form container */
+  form {
+    max-width: 500px;
+    margin: auto;
+    border-radius: 30px;
+    background-color: #C6E7C9;
+  }
+  
+  /* Style form labels and inputs */
+  label {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold; 
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 15px;
+    text-align: center;
+  }
+  
+  /* Style the submit button */
+  button {
+    background-color: #4AAD52;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 17px;
+    transition: background-color 0.3s ease; 
+  }
+  /* Add some spacing between form elements */
+  div > div {
+    margin-bottom: 10px;
+  }
+  
+  /* Add loading style */
+  p {
+    text-align: center;
+  }
+  
+  /* Add some styles for better visibility */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  /* Add some spacing between form elements */
+  div > div {
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 30px; /* Adjust the size as needed */
+  }

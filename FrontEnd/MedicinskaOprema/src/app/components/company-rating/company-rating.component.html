@@ -1,0 +1,50 @@
+<!-- company-rating.component.html -->
+<form [formGroup]="rateForm" (ngSubmit)="registerSubmitted()">
+
+  
+    <!-- Description field -->
+  <div class="form-row">
+    <label for="rate" class="form-label">Rate:</label>
+    <input type="number" class="form-control" id="rate" formControlName="rate">
+  </div>
+  <!-- Boolean fields using checkboxes -->
+  <div class="form-row">
+    <label class="form-check-label">
+      High Quality <input type="checkbox" formControlName="highQuality">
+    </label>
+  </div>
+  <div class="form-row">
+    <label class="form-check-label">
+      Low Quality <input type="checkbox" formControlName="lowQuality">
+    </label>
+  </div>
+  <div class="form-row">
+    <label class="form-check-label">
+      Cheap <input type="checkbox" formControlName="cheap">
+    </label>
+  </div>
+  <div class="form-row">
+    <label class="form-check-label">
+      Expensive <input type="checkbox" formControlName="expensive">
+    </label>
+  </div>
+  <div class="form-row">
+    <label class="form-check-label">
+      Wide Selection <input type="checkbox" formControlName="wideSelection">
+    </label>
+  </div>
+  <div class="form-row">
+    <label class="form-check-label">
+      Limited Selection <input type="checkbox" formControlName="limitedSelection">
+    </label>
+  </div>
+
+  <!-- Description field -->
+  <div class="form-row">
+    <label for="description" class="form-label">Description:</label>
+    <input type="text" class="form-control" id="description" formControlName="description">
+  </div>
+
+  <button type="submit" [disabled]="rateForm.invalid" class="btn btn-primary btn-lg mx-auto">SUBMIT</button>
+
+</form>

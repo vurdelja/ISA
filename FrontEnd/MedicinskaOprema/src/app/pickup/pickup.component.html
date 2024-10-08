@@ -1,0 +1,54 @@
+<div>
+    <h2>Equipment List</h2>
+    <ul>
+      <li *ngFor="let equipment of equipmentList">
+        <strong>{{ equipment.name }}</strong>
+        <br>
+        <button (click)="addEquipment(equipment)">Add</button>
+      </li>
+    </ul>
+  
+    <h2>Selected Equipment</h2>
+    <ul>
+      <li *ngFor="let equipment of selectedEquipment">
+        <strong>{{ equipment.name }}</strong>
+        <br>
+      </li>
+    </ul>
+  
+    <h2>Appointment List</h2>
+    <ul>
+      <li *ngFor="let appointment of appointmentList">
+        <strong>Appointment ID: {{ appointment.id }}</strong>
+        <br>
+        <strong>Status: {{ appointment.status === 0 ? 'Available' : appointment.status === 1 ? 'Reserved' : 'Collected' }}</strong>
+        <br>
+        <strong>Start Time: {{ appointment.start | date:'medium' }}</strong>
+        <br>
+      </li>
+    </ul>
+  
+    <button (click)="chooseExtraordinary()">Choose Extraordinary</button>
+  
+    <div *ngIf="showCalendar">
+      <h2>Select a Date</h2>
+      <input type="date" [min]="today" (change)="onDateChange($event)">
+    </div>
+  
+    <div *ngIf="extraordinaryAppointments.length > 0">
+      <h2>Extraordinary Appointments</h2>
+      <ul>
+        <li *ngFor="let appointment of extraordinaryAppointments">
+          <strong>Start Time: {{ appointment.start | date:'medium' }}</strong>
+          <br>
+          <button (click)="selectAppointment(appointment)">Select</button>
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="selectedAppointment">
+      <h2>Confirm Reservation</h2>
+      <button (click)="confirmReservation()">Confirm Reservation</button>
+    </div>
+  </div>
+  

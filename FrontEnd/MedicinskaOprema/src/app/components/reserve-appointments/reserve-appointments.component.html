@@ -1,0 +1,35 @@
+<div *ngIf="appointmentList.length > 0" class="appointment-details">
+  <h3>Appointment List</h3>
+  
+  <table class="appointment-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Reserved</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointmentList">
+        <td>{{ appointment.start }}</td>
+        <td>{{ appointment.duration }}</td>
+        <td>
+          <span *ngIf="appointment.status == 1; else notReserved">Yes</span>
+          <ng-template #notReserved>No</ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="appointment.id !== undefined">
+            <button (click)="toggleForm(appointment.id)">Toggle Form</button>
+          </ng-container>
+        
+          <form *ngIf="showForm && selectedAppointmentId === appointment.id" [formGroup]="appointmentForm" (ngSubmit)="reserveAppointment(appointment.id)">
+            <label for="number">Number:</label>
+            <input type="text" id="number" placeholder="Enter your number" formControlName="number" required>
+            <button type="submit" class="reserve-button">Submit</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

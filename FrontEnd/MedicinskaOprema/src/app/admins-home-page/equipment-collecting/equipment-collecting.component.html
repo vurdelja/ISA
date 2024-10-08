@@ -1,0 +1,20 @@
+<div *ngIf="reservationList.length > 0" class="equipment-details">
+    <h3>Uncollected reservations</h3>
+    <ul>
+      <li *ngFor="let reservation of reservationList" (click)="openReservationPopup(reservation)">
+        <p>User: {{ reservation.userId }}</p>
+        <p>Deadline: {{ reservation.deadline }}</p>
+      </li>
+    </ul>
+</div>
+<!-- Popup HTML -->
+<div *ngIf="selectedReservation" id="reservationPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" (click)="closeReservationPopup()">&times;</span>
+        <h2>Reservation Details</h2>
+        <p>User: {{ selectedReservation.userId }}</p>
+        <p>Deadline: {{ selectedReservation.deadline }}</p>
+        <div *ngIf="expired" class="expired-message">Reservation Expired</div>
+        <button class="collected-button" *ngIf="!expired" (click)="markAsCollected(selectedReservation)">Collected</button>
+    </div>
+</div>

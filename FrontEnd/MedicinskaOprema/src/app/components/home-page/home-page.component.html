@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div *ngIf="currentUser?.userRole !== UserRole.CAMPAIN_ADMIN">
+    <div class="tab">
+        <button class="tab-button" (click)="openTab($event, 'companies')">Show Companies Form</button>
+        <button class="tab-button" (click)="openTab($event, 'equipment')" *ngIf="currentUser?.userRole === UserRole.CAMPAIN_ADMIN || currentUser?.userRole === UserRole.SYSTEM_ADMIN || currentUser?.userRole === UserRole.REGISTER_USER">Show Equipment Form</button>
+    </div>
+   
+    <div class="content">
+        <!-- Dugme za registraciju kompanije -->
+       <!-- <button (click)="navigateToCompanyRating()">Company rating</button> -->
+    </div>
+
+    <div class="content" *ngIf="currentUser?.userRole === UserRole.CAMPAIN_ADMIN">
+        <!-- Dugme za registraciju kompanije -->
+        <button (click)="navigateToCompanyRegistration()">Register Company</button>
+    </div>
+
+    
+
+ 
+   
+ 
+    <div id="companies" class="tab-content active">
+        <form [formGroup]="searchForm" class="search-form">
+            <div class="search-container">
+                <input type="text" id="searchCompanies" formControlName="searchTerm" class="search-input" placeholder="Search...">
+                <button type="button" class="search-button" (click)="filterCompanies()">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+
+        <!-- Dodajte radio dugmad za izbor zvezdica -->
+        <div class="filtered-equipment-list">
+            <div class="rating-options">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5" title="5 stars"><img src="assets/five.png" alt="5 stars"></label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4" title="4 stars"><img src="assets/four.png" alt="4 stars"></label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" title="3 stars"><img src="assets/four.png" alt="3 stars"></label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2" title="2 stars"><img src="assets/two.png" alt="2 stars"></label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1" title="1 star"><img src="assets/one.png" alt="1 star"></label>
+            </div>
+        </div>
+        <div>
+            <h2>List of Companies</h2>
+            <ul>
+              <li *ngFor="let company of filteredCompaniesList">
+                <strong>Company name:</strong> {{ company.name }}
+                <br>
+                <strong>Address:</strong> {{ company.address }}
+                <br>
+                <strong>Average rating:</strong> {{ company.averageRating }}
+                <br>
+              </li>
+            </ul>
+          </div>
+    </div>  
+    <!-- Forma za pretragu opreme -->
+    <div id="equipment" class="tab-content" >
+        <form [formGroup]="searchForm">
+            <div class="search-container">
+                <input type="text" id="searchCompanies" formControlName="searchTerm" class="search-input" placeholder="Search...">
+                <button type="button" class="search-button" (click)="filterEquipment()">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+        
+            <div class="filtered-equipment-list">
+                <label for="filterType">Filter by Equipment Type:</label>
+                <select id="filterType" formControlName="filterType" (change)="filterEquipment()">
+                    <option value="">All Types</option>
+                    <option value="Type1">Type1</option>
+                    <option value="Type2">Type2</option>
+                    <!-- Add more equipment type options as needed -->
+                </select>
+            </div>
+        </form>
+
+        <!-- Display filtered equipment list -->
+        <div *ngIf="filteredEquipmentList.length > 0">
+            <h2>Filtered Equipment List</h2>
+            <ul>
+                <li *ngFor="let equipment of filteredEquipmentList">
+                    <p>Description: {{ equipment.description }}</p>
+                    <p>Name: {{ equipment.name }}</p>
+                    <p>Type: {{ equipment.type }}</p>
+                    <p>Description: {{ equipment.description }}</p>
+                    <button (click)="showCompanyDetails(equipment.id)">Show Companies</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Display company details -->
+        <div *ngIf="companyList.length > 0">
+            <h2>Companies</h2>
+            <ul>
+                <li *ngFor="let company of companyList">
+                    <p>Name: {{ company.name }}</p>
+                    <p>Description: {{ company.description }}</p>
+                    <!-- Display other company properties as needed -->
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div *ngFor="let company of companies" class="company-card" [routerLink]="['company-profile', company.id, currentUser?.userID]">
+
+        <h2>{{ company.name }}</h2>
+        <p>{{ company.address }}</p>
+        <p>{{ company.description }}</p>
+    </div>
+</div>
+
+<div class="company-section" *ngIf="currentUser?.userRole === UserRole.CAMPAIN_ADMIN">
+    <h1>My Company</h1>
+    <div *ngIf="adminsCompany" class="company-card" [routerLink]="['company-profile', adminsCompany.id, currentUser?.userID]">
+        <h3>{{ adminsCompany.name }}</h3>
+        <p>{{ adminsCompany.address }}</p>
+        <p>Working hours: {{ adminsCompany.openingTime }} - {{ adminsCompany.closingTime }}</p>
+        <button class="register-button" [routerLink]="['users-reserved', adminsCompany.id, currentUser?.userID]">Show Users Who Reserved</button>
+        <button class="register-button" [routerLink]="['equipment-collecting', adminsCompany.id]">Equipment Collecting</button>
+    </div>
+    <button  class="register2-button" (click)="navigateToCompanyRegistration()">Register Company</button>
+
+    <div class="pdf-section">
+        <h2>PDF Document Link</h2>
+        <p>Click the link below to view the PDF document:</p>
+        <a class="pdf-link" href="https://docs.google.com/document/d/1RhfdLtFPXXYiFMlonaACRM9kMmGgHvDwCzhzvYEYvto/edit" target="_blank">View PDF Document</a>
+    </div>
+</div>
+</body>
+</html>

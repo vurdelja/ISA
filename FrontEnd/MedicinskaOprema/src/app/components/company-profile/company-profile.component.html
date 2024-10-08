@@ -1,0 +1,92 @@
+<div *ngIf="company" class="company-details">
+    <h2>{{ company.name }}</h2>
+    <p>Address: {{ company.address }}</p>
+    <p>Description: {{ company.description }}</p>
+    <p>Average Rating: {{ company.averageRating }}</p> 
+    <div *ngIf="equipmentList.length > 0" class="equipment-details">
+      <h3>Equipment List</h3>
+      <ul>
+        <li *ngFor="let equipment of equipmentList">
+          <p class = "name">{{ equipment.name }}</p>
+          <p>{{ equipment.type }}</p>
+          <p>Description: {{ equipment.description }}</p>
+          <p>Rating: {{ equipment.rating }}</p>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="equipmentList.length === 0">
+      <p>No equipment available for this company.</p>
+    </div>
+    
+    <button *ngIf="currentUser?.userRole === UserRole.REGISTER_USER" (click)="rateCompany()">Rate Company</button>
+
+    <button (click)="toggleAppointmentList()">Show Appointment List</button>
+    <div *ngIf="showAppointmentList && appointmentList.length > 0" class="equipment-details">
+
+    <div *ngIf="appointmentList.length > 0" class="equipment-details">
+      <h3>Appointment List</h3>
+      <ul>
+        <li *ngFor="let appointment of appointmentList">
+          <p>Date: {{ appointment.start }}</p>
+          <p>Duration: {{ appointment.duration }}</p>
+          <p>
+            Reserved: 
+            <span *ngIf="appointment.status == 1; else notReserved">Yes</span>
+            <ng-template #notReserved>No</ng-template>
+          </p>
+        </li>
+      </ul>
+      <!-- Add appointment form goes here -->
+      <button (click)="toggleAppointmentForm()">Add Appointment</button>
+
+
+      <div *ngIf="showAppointmentForm" class="appointment-form"> 
+        <form [formGroup]="appointmentForm" (ngSubmit)="addAppointment()" class="form-container">
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" formControlName="date" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="duration">Duration:</label>
+            <input type="number" id="duration" formControlName="duration" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="equipment">Equipment:</label>
+            <select id="equipment" formControlName="equipmentId" required>
+              <option *ngFor="let equipment of equipmentList" [value]="equipment.id">{{ equipment.name }}</option>
+            </select>
+          </div>
+    
+          <div class="form-group">
+            <button type="submit" [disabled]="!appointmentForm.valid">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    <button [routerLink]="['reserve-appointments', company.id]">Extraordinary appointments</button>
+
+      
+
+      <!-- Add extraordinary appointment form goes here -->
+      <button [routerLink]="['extraordinary-appointment', company.id]">Extraordinary appointments</button>
+
+    <button  *ngIf="currentUser?.userRole === UserRole.REGISTER_USER" [routerLink]="['reserve-appointments', company.id]">Reserve appointments</button>
+
+    
+  </div>
+  <div class="equipment-details">
+    <h3>Other administrators of this company</h3>
+    <ul>
+      <li *ngFor="let user of otherAdmins">
+        <p>{{ user.name }}</p>
+        <p>{{ user.surname }}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="center" *ngIf="currentUser?.userRole === UserRole.CAMPAIN_ADMIN">
+    <button [routerLink]="['company-profile-editing']">Edit</button>
+    
+  </div>
+  

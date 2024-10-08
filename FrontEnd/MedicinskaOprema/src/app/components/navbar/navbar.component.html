@@ -1,0 +1,29 @@
+<!-- src/app/components/navbar/navbar.component.html -->
+<div class="navbar">
+    <div class="navbar-logo">
+      <img src="assets/medikhubV2.png" alt="MedikHub Logo" class="logo" width="150" height="50">
+    </div>
+  
+    <div class="navbar-links">
+      <a href="#">Home</a>
+      <a class="link" [routerLink]="['app-user-management']" *ngIf="currentUser?.userRole === UserRole.SYSTEM_ADMIN">User Management</a>
+      <a class="link" [routerLink]="['app-calendar']" *ngIf="currentUser?.userRole === UserRole.SYSTEM_ADMIN || currentUser?.userRole === UserRole.CAMPAIN_ADMIN">Calendar</a>
+      <a class="link" [routerLink]="['user-home-page']" *ngIf="currentUser?.userRole === UserRole.REGISTER_USER">User home page</a>
+    </div>
+  
+    <div class="navbar-button">
+      <div class="navbar-dropdown">
+        <button class="profile-button" (mouseenter)="showOptions = true" (mouseleave)="showOptions = false">
+          Options
+          <div class="dropdown-options" *ngIf="showOptions">
+            <a (click)="logout()" *ngIf="currentUser?.userRole !== UserRole.UNAUTHENTICATED_USER">Logout</a>
+            <a [routerLink]="['/login']" *ngIf="currentUser?.userRole === UserRole.UNAUTHENTICATED_USER">Login</a>
+            <a [routerLink]="['admin-profile-editing', currentUser?.userID]" *ngIf="currentUser?.userRole === UserRole.SYSTEM_ADMIN">Admin Profile Editing</a>
+            <a [routerLink]="['user-profile-editing', currentUser?.userID]">User Profile Editing</a>
+            <a [routerLink]="['equipment-collecting']" *ngIf="currentUser?.userRole === UserRole.CAMPAIN_ADMIN">Equipment collecting</a>
+            <a [routerLink]="['qr-container']" *ngIf="currentUser?.userRole === UserRole.CAMPAIN_ADMIN">Qr</a>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>

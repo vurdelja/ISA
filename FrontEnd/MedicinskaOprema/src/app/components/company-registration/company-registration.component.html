@@ -1,0 +1,89 @@
+
+
+<form [formGroup]="compregistrationForm" (ngSubmit)="registerSubmited()" class="border p-3 rounded-s company-registration-container">
+  <div class="container">
+    <div class="custom-border">
+      <div class="row g-0 text-center mb-3">
+        <div class="col">
+          <h2 class="registration-header">REGISTRATION</h2>
+        </div>
+      </div>
+
+      <!-- Name -->
+      <div class="row">
+        <div class="col mb-3">
+          <label for="name" class="form-label form-label-bold">NAME</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <div class="form-text text-danger" *ngIf="Name.errors?.['required']">
+            Name is required!
+          </div>
+          <div class="form-text text-danger" *ngIf="Name.errors?.['pattern']">
+            Numbers are not allowed!
+          </div>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="row">
+        <div class="col mb-3">
+          <label for="adress" class="form-label form-label-bold">ADDRESS</label>
+          <input type="text" class="form-control" id="adress" formControlName="adress">
+          <div class="form-text text-danger" *ngIf="Adress.errors?.['required']">
+            Address is required!
+          </div>
+          <div class="form-text text-danger" *ngIf="Adress.errors?.['pattern']">
+            Numbers are not allowed!
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="row">
+        <div class="col mb-3">
+          <label for="description" class="form-label form-label-bold">DESCRIPTION</label>
+          <input type="text" class="form-control" id="description" formControlName="description">
+          <div class="form-text text-danger" *ngIf="Description.errors?.['required']">
+            Description is required!
+          </div>
+          <div class="form-text text-danger" *ngIf="Description.errors?.['pattern']">
+            Numbers are not allowed!
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-3">
+          <label for="adminId" class="form-label form-label-bold">ADMINISTRATOR</label>
+          <select class="form-select" id="adminId" formControlName="adminId">
+            <option *ngFor="let user of users" [value]="user.userID">{{ user.name }} {{ user.surname }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+          <label for="openingTime" class="form-label form-label-bold">Opening Time (hh:mm:ss)</label>
+          <input type="time" class="form-control" id="openingTime" formControlName="openingTime">
+
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col mb-3">
+          <label for="closingTime" class="form-label form-label-bold">Closing Time (hh:mm:ss)</label>
+          <input type="time" class="form-control" id="closingTime" formControlName="closingTime" >
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-6 offset-3 text-center">
+          <div class="d-grid">
+            <button type="submit" [disabled]="compregistrationForm.invalid"
+              class="btn btn-primary btn-lg mx-auto submit-button">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</form>

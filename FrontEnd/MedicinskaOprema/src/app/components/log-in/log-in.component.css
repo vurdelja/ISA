@@ -1,0 +1,24 @@
+form{
+    width: 1200px; /* Skraćena širina forme */
+    margin: auto; /* Centriranje forme horizontalno unutar svog kontejnera */
+    padding: 20px; /* Dodavanje unutrašnjeg prostora oko sadržaja forme */
+    border: 1px solid #ccc; /* Dodavanje tanke ivice */
+    border-radius: 10px; /* Zaobljeni uglovi */
+    overflow: hidden; /* Sakrivanje */
+    background-color: #fff;
+    align-items: center;
+
+}
+
+button {
+    background-color: #4AAD52; /* Add your desired button color */
+    color: white; /* Add your desired button text color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 17px;
+    transition: background-color 0.3s ease; 
+    align-self: center;
+  }

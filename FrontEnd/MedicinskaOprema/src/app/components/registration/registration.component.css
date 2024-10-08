@@ -1,0 +1,8 @@
+form {
+  width: 1200px; /* Skraćena širina forme */
+  margin: auto; /* Centriranje forme horizontalno unutar svog kontejnera */
+  padding: 20px; /* Dodavanje unutrašnjeg prostora oko sadržaja forme */
+  border: 1px solid #ccc; /* Dodavanje tanke ivice */
+  border-radius: 10px; /* Zaobljeni uglovi */
+  overflow: hidden; /* Sakrivanje */
+}

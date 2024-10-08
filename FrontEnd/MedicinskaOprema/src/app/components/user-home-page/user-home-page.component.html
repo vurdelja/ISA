@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <div class="tab">
+        <button class="tab-button" (click)="openTab($event, 'companies')">Show Companies Form</button>
+        <button class="tab-button" (click)="openTab($event, 'user-profile-editing')">Edit User Profile</button>
+        <button class="tab-button" (click)="openTab($event, 'reservations')">PickUp History</button>
+        <button class="tab-button" (click)="openTab($event, 'appointments')">Appointments</button>
+        <button class="tab-button" (click)="openTab($event, 'uncollected-reservations')">Uncollected Reservations</button>
+
+    </div>
+
+    <div id="reservations" class="tab-content">
+        <h2>Reservation History</h2>
+        <ul>
+            <li *ngFor="let reservation of reservations">
+                <strong>Reservation ID:</strong> {{ reservation.id }}
+                <br>
+                <strong>Date Collected:</strong> {{ reservation.deadline | date: 'longDate' }}
+            </li>
+        </ul>
+    </div>
+
+    <div id="appointments" class="tab-content">
+        <h2>Appointment List</h2>
+        <ul>
+            <li *ngFor="let appointment of appointments">
+              <strong>Appointment ID: {{ appointment.id }}</strong>
+              <br>
+              <strong>Status: {{ appointment.status === 0 ? 'Available' : appointment.status === 1 ? 'Reserved' : 'Collected' }}</strong>
+              <br>
+              <strong>Start Time: {{ appointment.start | date:'medium' }}</strong>
+              <br>
+              <button *ngIf="appointment.id !== undefined && canCancel(appointment.start)" (click)="cancelAppointment(appointment.id)">
+                Cancel Appointment
+              </button>
+            </li>
+          </ul>
+      </div>
+      
+    
+    <div id="companies" class="tab-content">
+        <form [formGroup]="searchForm" class="search-form">
+            <div class="search-container">
+                <input type="text" id="searchCompanies" formControlName="searchTerm" class="search-input" placeholder="Search...">
+                <button type="button" class="search-button" (click)="filterCompanies()">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+            <select formControlName="filterRating">
+                <option value="">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4-5">4 to 5 Stars</option>
+                <option value="3-4">3 to 4 Stars</option>
+                <option value="2-3">2 to 3 Stars</option>
+                <option value="1-2">1 to 2 Stars</option>
+            </select>
+            <!-- Address Filter Dropdown -->
+            <select formControlName="filterAddress">
+                <option value="">All Addresses</option>
+                <option *ngFor="let address of addresses" [value]="address">{{ address }}</option>
+            </select>
+          
+            <button type="button" (click)="filterCompanies()">Filter</button>
+        
+
+        </form>
+
+
+        <div>
+            <h2>List of Companies</h2>
+            <ul>
+                <li *ngFor="let company of filteredCompaniesList">
+                    <button (click)="navigateToPickup(company.id)">
+                        <strong>Company name:</strong> {{ company.name }}
+                        <br>
+                        <strong>Address:</strong> {{ company.address }}
+                        <br>
+                        <strong>Average rating:</strong> {{ company.averageRating }}
+                        <br>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>  
+ 
+
+    <div id="user-profile-editing" class="tab-content">
+        <app-user-profile-editing></app-user-profile-editing>
+    </div>
+
+
+    <div id="uncollected-reservations" class="tab-content">
+        <h2>Uncollected Reservations</h2>
+        <ul>
+            <li *ngFor="let reservation of uncollectedReservations">
+                <strong>Reservation ID:</strong> {{ reservation.id }}
+                <br>
+                <strong>Appointment Time:</strong> {{ reservation.appointmentTime | date: 'medium' }}
+                <br>
+                <button (click)="cancelPickupReservation(reservation.id)">
+                    Cancel Reservation
+                </button>
+            </li>
+        </ul>
+    </div>
+
+
+</body>
+</html>

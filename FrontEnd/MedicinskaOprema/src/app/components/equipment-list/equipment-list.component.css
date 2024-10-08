@@ -1,0 +1,84 @@
+.appointment-details {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .appointment-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  .appointment-table th, .appointment-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .appointment-table th {
+    background-color: #417346;
+    color: white;
+  }
+  
+  form {
+    margin-top: 20px;
+    background-color: #88c78b;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 20px; /* Add padding for a better visual */
+    color: white;
+    text-align: center; /* Center the text within the form */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 250px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+  }
+  
+  button.reserve-button {
+    display: block; /* Make the button a block-level element */
+    width: 250px; /* Match the width of the input */
+    margin: 0 auto; /* Center the button within the form */
+    background-color: white;
+    color: #4caf50;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  button.reserve-button:hover {
+    background-color: #414641; 
+    color: white;
+  }
+
+  button.edit-button {
+    display: block; /* Make the button a block-level element */
+    width: 150px; /* Match the width of the input */
+    margin: 0 auto; /* Center the button within the form */
+    background-color: white;
+    color: #4caf50;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer; 
+  }
+  
+  button.edit-button:hover {
+    background-color: #414641; 
+    color: white;
+  }
+  
